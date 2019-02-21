@@ -1,0 +1,30 @@
+{
+  "name": "json-config",
+  "version": "0.0.0",
+  "description": "Simple package to quickly read JSON stored configuration file on Node",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha test/index.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ionware/configjs.git"
+  },
+  "keywords": [
+    "config",
+    "configure",
+    "configuration",
+    "json",
+    "json-config"
+  ],
+  "author": "Adedeji Stephen <ionwarez@gmail.com> (https://github.com/ionware)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ionware/configjs/issues"
+  },
+  "homepage": "https://github.com/ionware/configjs#readme",
+  "devDependencies": {
+    "chai": "4.2.0",
+    "mocha": "6.0.0"
+  }
+}
