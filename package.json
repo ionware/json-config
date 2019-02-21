@@ -1,5 +1,5 @@
 {
-  "name": "json-config",
+  "name": "flyconfig",
   "version": "0.0.0",
   "description": "Simple package to quickly read JSON stored configuration file on Node",
   "main": "src/index.js",
