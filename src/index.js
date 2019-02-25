@@ -1,30 +1,68 @@
 const fs = require('fs');
-const path = require('path');
 const process = require('process');
 
+/**
+ * Custom error thrown when config file required cannot be read
+ * by the Filesystem
+ */
 class ConfigFileNotFound extends Error {
 
 }
 
-const configContent = fs.readFileSync(path.join(__dirname, 'config.json'), function(err) {
-    if (err) {
-        throw new ConfigFileNotFound("Cannot read configuration file.");
-    }
-});
-const env = process.env.NODE_ENV || 'development';
-const configs = JSON.parse(configContent.toString());
 
-function config(propChain, fallback = null) {
-    let props = propChain.split('.');
-    let configObject = configs[env];
-    for (let prop of props) {
-        if (!configObject.hasOwnProperty(prop))
-            return fallback;
-            
-        configObject = configObject[prop];
+/**
+ * The Configuration Loader and Getter Class.
+ */
+class Config {
+    /**
+     * Initilize the class.
+     */
+    constructor() {
+        this.configs = {};
+    }
+    /**
+     * Loads the configuration file and store in config object.
+     * 
+     * @param {string} filePath resolved path to config JSON file.
+     */
+    load(filePath) {
+        const env = process.env.NODE_ENV || 'development';
+        this.configs = JSON.parse(this._readConfig(filePath).toString())[env];
+
+        return this;
     }
 
-    return configObject;
+    /**
+     * Read the configuration JSON file and pass back to load to read.
+     * 
+     * @param {string} filePath resolved path to config JSON file as passed in load.
+     */
+     _readConfig(filePath) {
+        return fs.readFileSync(filePath, function(err) {
+            if (err) {
+                throw new ConfigFileNotFound("Cannot read configuration file.");
+            }
+        });
+    }
+
+    /**
+     * Get the specified segment of the configuration.
+     * 
+     * @param {string} propChain the property to get in the loaded config object.
+     * @param {any} fallback The default value to return if required property not exist.
+     */
+    get(propChain, fallback = null) {
+        let props = propChain.split('.');
+        let configObject = this.configs;
+        for (let prop of props) {
+            if ( !configObject.hasOwnProperty(prop))
+                return fallback;
+                
+            configObject = configObject[prop];
+        }
+    
+        return configObject;
+    }
 }
 
-module.exports = config;
+module.exports = new Config;

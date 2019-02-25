@@ -1,0 +1,31 @@
+{
+    "development": {
+        "database": {
+            "host": "localhost",
+            "username": {
+                "master": "root",
+                "cluster": ["cl1", "cl2", "cl3"]
+            },
+            "password": "secret"
+        },
+        "mail": {
+            "host": "smtp.mailtrap.io",
+            "password": "secret",
+            "username": "ionware",
+            "port": 553
+        }
+    },
+    "production": {
+        "database": {
+            "host": "db.heroku.com",
+            "username": "root",
+            "password": "Ninja345__"
+        },
+        "mail": {
+            "host": "smtp.zoho.com",
+            "username": "info",
+            "password": "JinJa450)r",
+            "port": 553
+        }
+    }
+}

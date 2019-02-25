@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test/index.test.js",
+    "coverage": "istanbul cover -x *.test.js _mocha -- -R spec test/index.test.js",
+    "test:single": "mocha test/index.test.js",
     "semantic-release": "semantic-release",
     "commit": "git-cz"
   },
@@ -29,12 +31,17 @@
     "chai": "4.2.0",
     "commitizen": "3.0.5",
     "cz-conventional-changelog": "2.1.0",
+    "ghooks": "2.0.4",
+    "istanbul": "0.4.5",
     "mocha": "6.0.0",
     "semantic-release": "^15.13.3"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run test:single"
     }
   }
 }
