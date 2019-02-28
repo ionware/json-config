@@ -9,6 +9,8 @@ notifications:
   email: false
 before_install:
   - npm i -g npm
+install:
+  - npm install
 before_script:
   - npm prune
 script:
